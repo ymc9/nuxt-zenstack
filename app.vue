@@ -1,5 +1,7 @@
+<!-- eslint-disable prettier/prettier -->
+
 <template>
-  <NuxtLayout>
-    <NuxtPage />
-  </NuxtLayout>
+    <NuxtLayout>
+        <NuxtPage />
+    </NuxtLayout>
 </template>
