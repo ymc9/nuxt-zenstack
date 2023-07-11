@@ -14,13 +14,23 @@ generator client {
     provider = "prisma-client-js"
 }
 
+plugin zod {
+    provider = '@core/zod'
+    output = './trpc/zod'
+}
+
+plugin trpc {
+    provider = '@zenstackhq/trpc'
+    output = './trpc/generated'
+    zodSchemasImport = '../../zod'
+}
+
 /**
  * User model
  */
 model User {
     id String @id @default(cuid())
     email String @unique @email
-    password String @password @omit @length(8, 16)
     posts Post[]
 
     // everybody can signup
@@ -44,7 +54,7 @@ model Post {
     authorId String?
 
     // allow read for all signin users
-    @@allow('read', auth() != null && published)
+    @@allow('read', published)
 
     // full access by author
     @@allow('all', author == auth())

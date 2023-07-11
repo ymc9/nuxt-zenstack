@@ -18,10 +18,6 @@ model User {
     id String @id() @default(cuid())
     /// @email
     email String @unique()
-    /// @password
-    /// @omit
-    /// @length(8, 16)
-    password String
     posts Post[]
 
     zenstack_guard Boolean @default(true)
@@ -30,7 +26,7 @@ model User {
     @@index([zenstack_transaction])
 }
 
-/// @@allow('read', auth() != null && published)
+/// @@allow('read', published)
 /// @@allow('all', author == auth())
 model Post {
     id String @id() @default(cuid())
